@@ -1,0 +1,61 @@
+<html ng-app="MyApp">
+<head>
+	<title>Test</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="moment.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.6/angular.min.js'></script>
+	<script src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+	<script src='https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js'></script>
+	
+</head>
+<body ng-controller="Controller"> 
+
+<div class="container">
+	<div class="page-header"><h1><b>WIT -- Where is IT?</b></h1></div>
+
+<div class="row">
+		
+<!-- Joe -->
+	<div class="col-xs-6">
+		<input type="text" ng-model = "newJFStatus" /><button type="submit" ng-click="updateJFStatus()">Update</button><div ng-repeat="newJFStatus in status"><b>{{newJFStatus.joe}}</b> &nbsp;&nbsp;&nbsp;{{newJFStatus.jftime}}</div>
+	</div>
+<!-- Michael -->
+	<div class="col-xs-6">
+		<input type="text" ng-model = "newMFStatus" /><button type="submit" ng-click="updateMFStatus()">Update</button><div ng-repeat="newMFStatus in status"><b>{{newMFStatus.flowers}}</b> &nbsp;&nbsp;&nbsp;{{newMFStatus.mftime}}</div>
+	</div>
+</div>
+
+
+</body>
+
+<script>
+
+
+
+	var MyApp = angular.module("MyApp", ["firebase"]);
+
+	function Controller($scope, $firebase) {
+		var statusRef = new Firebase("https://tocit.firebaseio.com/wit");
+		$scope.status = $firebase(statusRef);
+
+		$scope.updateJFStatus = function() { 
+			$scope.status.$add({joe: $scope.newJFStatus, jftime: $scope.jfcurrentTime});
+
+		$scope.newJFStatus = "";
+			}
+
+		$scope.updateMFStatus = function() { 
+			$scope.status.$add({flowers: $scope.newMFStatus, mftime: $scope.mfcurrentTime});
+
+			$scope.newMFStatus = "";
+			}
+
+			$scope.jfcurrentTime = moment().format('MMMM Do , h:mm a');
+			$scope.mfcurrentTime = moment().format('MMMM Do , h:mm a');
+		}
+
+		
+
+</script>
+
+</html>
