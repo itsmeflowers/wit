@@ -1,3 +1,9 @@
+This is a generic status board that I coded for our two-person IT department to use on a 1st Gen Google Nexus as a Status Board. Simply helps everyone know where we are if they're looking for us and helps with the number of pages on the intercom.
+
+Setup documentation coming soon and a generic version you can use for yourself. In the meantime, try to figure it out, it's not too complicated.
+
+---Stuff from the Old Readme---
+
 This is a Vagrant file and set of Chef recipes for building a basic node development environment.
 If you're not familiar with Vagrant, read more about it at http://www.vagrantup.com.
 
