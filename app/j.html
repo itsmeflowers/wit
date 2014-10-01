@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+
+	<title>Joe Status</title>
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<script type="text/javascript" src="moment.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.6/angular.min.js'></script>
+	<script src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+	<script src='https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js'></script>
+
+
+	</head>
+	<body >
+	
+	
+		
+		<div class="container" ng-controller="jfController"><div class="pull-right">
+
+		<!-- Person's Name in Top Right Corner -->	
+		<u><a href="http://itstat:3000/m.html"><i class="glyphicon glyphicon-chevron-left"></i></a><i><h3>Joe</h3></i></u></div><br/>
+
+		<form class="form-inline" role="form">
+		<div class="form-group"><input type="text" ng-model = "newJFStatus"/><button type="submit" class="btn btn-default btn-xs" ng-click="updateJFStatus()">
+
+		<!-- What the Submit Button Next to the Form Says -->
+		Update</button></div></form>
+		<br/><br/>
+		<div class="pull-right" ng-repeat="newJFStatus in status">
+		Currently: {{newJFStatus.joe}}</div>
+			<br/><br/>
+
+<!-- Buttons -->
+
+<div class="row"><div class="col-md-4">
+	<button type="submit" class="btn btn-default btn-lg btn-block" 
+	ng-click="IToffice()">IT Office
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="Bathroom()">Bathroom
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="Home()">Home
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayA()">Hallway A
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayB()">Hallway B
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayC()">Hallway C
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayD()">Hallway D
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayE()">Hallway E
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="fDesk()">Front Desk
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="medRec()">Med Records 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="oper()">Operator 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="kenOff()">Ken's Office 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="jeffOff()">Jeff's Office 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="halls()">Halls 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="xray()">X-ray 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="breakroom()">Break Room 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="pmba()">PMBA 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="prs()">PRS 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="ctp()">CT/MRI 
+	</button><br/></div></div>
+
+<div class="row"><div class="col-md-4">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="offSite()">Off Site
+	</button><br/></div></div>
+
+<!-- Bottom Footer, Open or Closed -->
+
+		<hr>
+		<center><div class="container">
+		<div class="row" >
+		<div class="col-xs-4">
+			<button type="button" class="btn btn-default btn-sm" 
+			ng-click="ocOpen()">Open
+			</button></div>
+		<div class="col-xs-4">
+			<button type="button" class="btn btn-default btn-sm" 
+			ng-click="ocClosed()">Closed
+			</button></div></div></div
+			></center>
+
+</div><br/><br/><br/>
+</body>
+
+<!-- The Fun Starts Here-->
+<script>
+
+	var MyApp = angular.module("MyApp", ["firebase"]);
+
+
+	function jfController($scope, $firebase) {
+		
+		var statusRef = new Firebase("https://tocit.firebaseio.com/witjf");
+		
+		var ocRef = new Firebase("https://tocit.firebaseio.com/witoc");
+
+		$scope.status = $firebase(statusRef);
+		$scope.oc = $firebase(ocRef);
+
+
+			$scope.ocStatus = function() {
+			$scope.oc.$remove(); 
+			$scope.oc.$add({ocstatus: $scope.newOCStatus});     
+			}
+
+			$scope.ocOpen = function() {
+			$scope.oc.$remove(); 
+			$scope.oc.$add({ocstatus: "Open"});     
+			}
+
+			$scope.ocClosed = function() {
+			$scope.oc.$remove(); 
+			$scope.oc.$add({ocstatus: "Closed"});
+			}
+
+			$scope.updateJFStatus = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: $scope.newJFStatus, jftime: $scope.jfcurrentTime});
+
+			$scope.newJFStatus = "";
+			}
+
+			$scope.IToffice = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "IT Office", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.Bathroom = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Bathroom", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.Home = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Home", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.hallwayA = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Hallway A", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.hallwayB = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Hallway B", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.hallwayD = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Hallway D", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.hallwayC = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Hallway C", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.hallwayE = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Hallway E", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.fDesk = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Front Desk", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.medRec = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Medical Records", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.oper = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Operator", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.kenOff = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Ken's Office", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.jeffOff = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Jeff's Office", jftime: $scope.jfcurrentTime});
+
+			}
+
+			$scope.offSite = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Off Site", jftime: $scope.jfcurrentTime});  
+
+			}
+
+			$scope.halls = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Halls", jftime: $scope.jfcurrentTime});  
+
+			}
+
+			$scope.pmba = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "PMBA", jftime: $scope.jfcurrentTime});  
+
+			}
+
+			$scope.prs = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "PRS", jftime: $scope.jfcurrentTime});  
+
+			}
+
+			$scope.ctp = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "CT/MRI", jftime: $scope.jfcurrentTime});  
+
+			}
+
+			$scope.breakroom = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "Break Room", jftime: $scope.jfcurrentTime});  
+
+			}
+
+			$scope.xray = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({joe: "X-ray", jftime: $scope.jfcurrentTime});  
+
+			}
+			
+
+			$scope.jfcurrentTime = moment().format('MMMM Do , h:mm a');
+		};
+
+</script>
+
+
+</html>

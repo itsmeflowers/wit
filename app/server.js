@@ -1,7 +1,11 @@
-var connect = require('connect');
-connect.createServer(
-connect.static(__dirname)
-	).listen(3000);
+var connect = require ("connect")
+var http = require ("http")
+var site = connect() 
+
+.use(connect.static(__dirname))
+.use(connect.directory);
+
+http.createServer(site).listen(3000);
 
 // var http = require("http"),
 //     server;

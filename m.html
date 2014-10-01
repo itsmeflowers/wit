@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+	<title>Michael Status</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<script type="text/javascript" src="moment.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.6/angular.min.js'></script>
+	<script src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+	<script src='https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js'></script>
+
+
+	</head>
+	<body >
+	
+	
+		
+		<div class="container" ng-controller="mfController"><div class="pull-right"><u><i><h3>Flowers</h3></i></u></div>
+		<br/>
+		<form class="form-inline" role="form">
+		<div class="form-group">
+		<input type="text" ng-model = "newMFStatus"/><button type="submit" class="btn btn-default btn-xs" 
+		ng-click="updateMFStatus()">Update</button></div></form>
+
+	<div class="pull-right" ng-repeat="newMFStatus in status">Currently: {{newMFStatus.flowers}}</div>
+	<br/><br/>
+
+<div class="col-md-1">
+	<button type="submit" class="btn btn-default btn-lg btn-block" 
+	ng-click="IToffice()">IT Office</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="Bathroom()">Bathroom</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="Home()">Home</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayA()">Hallway A</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayB()">Hallway B</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayC()">Hallway C</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayD()">Hallway D</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="hallwayE()">Hallway E</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="fDesk()">Front Desk</button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="medRec()">Med Records </button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="oper()">Operator </button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="kenOff()">Ken's Office </button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="jeffOff()">Jeff's Office </button><br/></div>
+
+<div class="col-md-1">
+	<button type="button" class="btn btn-default btn-lg btn-block" 
+	ng-click="offSite()">Off Site</button><br/></div>
+
+<hr>
+<center><div class="container">
+<div class="row" >
+<div class="col-xs-4">
+	<button type="button" class="btn btn-default btn-sm" 
+	ng-click="ocOpen()">Open</button></div>
+<div class="col-xs-4">
+	<button type="button" class="btn btn-default btn-sm" 
+	ng-click="ocClosed()">Closed</button></div></div></div></center>
+
+</div><br/><br/><br/>
+</body>
+
+<script>
+
+	var MyApp = angular.module("MyApp", ["firebase"]);
+
+
+	function mfController($scope, $firebase) {
+		
+		var statusRef = new Firebase("https://tocit.firebaseio.com/witmf");
+		
+		var ocRef = new Firebase("https://tocit.firebaseio.com/witoc");
+
+		$scope.status = $firebase(statusRef);
+		$scope.oc = $firebase(ocRef);
+
+
+			$scope.ocStatus = function() {
+			$scope.oc.$remove(); 
+			$scope.oc.$add({ocstatus: $scope.newOCStatus});     
+			}
+
+			$scope.ocOpen = function() {
+			$scope.oc.$remove(); 
+			$scope.oc.$add({ocstatus: "Open"});     
+			}
+
+			$scope.ocClosed = function() {
+			$scope.oc.$remove(); 
+			$scope.oc.$add({ocstatus: "Closed"});
+			}
+
+			$scope.updateMFStatus = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: $scope.newMFStatus, mftime: $scope.mfcurrentTime});
+
+			$scope.newMFStatus = "";
+			}
+
+			$scope.IToffice = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "IT Office", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.Bathroom = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Bathroom", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.Home = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Home", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.hallwayA = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Hallway A", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.hallwayB = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Hallway B", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.hallwayD = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Hallway D", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.hallwayC = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Hallway C", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.hallwayE = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Hallway E", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.fDesk = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Front Desk", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.medRec = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Medical Records", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.oper = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Operator", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.kenOff = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Ken's Office", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.jeffOff = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Jeff's Office", mftime: $scope.mfcurrentTime});
+
+			}
+
+			$scope.offSite = function() {
+			$scope.status.$remove(); 
+			$scope.status.$add({flowers: "Off Site", mftime: $scope.mfcurrentTime});  
+
+			}
+
+			// $scope.newMFButtonClick = function() {
+			// $scope.status.$remove(); 
+			// $scope.status.$add({flowers: $scope.newMFButtonClick, mftime: $scope.mfcurrentTime});
+			// }
+
+			// $scope.newMFButtonClick = "";
+			
+
+			$scope.mfcurrentTime = moment().format('MMMM Do , h:mm a');
+		};
+
+</script>
+
+
+</html>
